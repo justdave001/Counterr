@@ -48,11 +48,11 @@ function App() {
   //--on magnitude given in "data")
   const onDecrement = (id, factor) => {
     //changeable list to store previous state values
-    //for later update
+    //for later update hence use "let"
     let updateState = [...state];
     //object that holds the id for pointing to button
     let point = { ...state[id] };
-    //let point have value
+    //give point  value
     point.value = point.value - Number(factor);
     //find btn for update
     updateState[id] = point;
