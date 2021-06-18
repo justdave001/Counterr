@@ -7,10 +7,10 @@ import "./App.css";
 //incremental value for "{value}'s" and can be changed
 //if needed
 const data = [
-  { id: 1, value: 0, factor: 1 },
-  { id: 2, value: 0, factor: 1 },
-  { id: 3, value: 0, factor: 1 },
-  { id: 4, value: 0, factor: 1 }
+  { id: 1, value: 0, byfactor: 1 },
+  { id: 2, value: 0, byfactor: 1 },
+  { id: 3, value: 0, byfactor: 1 },
+  { id: 4, value: 0, byfactor: 1 }
 ];
 const Counterr = ({ id, value, onDecrement, onIncrement }) => {
     return (
@@ -46,29 +46,29 @@ function App() {
   //and makes use of that factor for decreasing 
   //value of button (can be either by 1,2,3... depending
   //--on magnitude given in "data")
-  const onDecrement = (id, factor) => {
+  const onDecrement = (id, byfactor) => {
     //changeable list to store previous state values
     //for later update hence use "let"
     let updateState = [...state];
     //object that holds the id for pointing to button
     let point = { ...state[id] };
     //give point  value
-    point.value = point.value - Number(factor);
+    point.value = point.value - Number(byfactor);
     //find btn for update
     updateState[id] = point;
     //perform sum
-    setSum((prevSum) => prevSum - Number(factor));
+    setSum((prevSum) => prevSum - Number(byfactor));
     //update value of state
     setState(updateState);
   };
 //do same as for "onDecrement" but add change 
 //"-" to + as it calls for increasing value
-  const onIncrement = (id, factor) => {
+  const onIncrement = (id, byfactor) => {
     let updateState = [...state];
     let point = { ...state[id] };
-    point.value = point.value + Number(factor);
+    point.value = point.value + Number(byfactor);
     updateState[id] = point;
-    setSum((prevSum) => prevSum + Number(factor));
+    setSum((prevSum) => prevSum + Number(byfactor));
     setState(updateState);
   };
 
@@ -83,8 +83,10 @@ function App() {
             key={counter.id}
             id={counter.id}
             value={counter.value}
-            onIncrement={() => onIncrement(counter.id - 1, counter.factor)}
-            onDecrement={() => onDecrement(counter.id - 1, counter.factor)}
+            //Increase/decrease value based on click by 
+            //passing in the id and "byfactor" as params
+            onIncrement={() => onIncrement(counter.id - 1, counter.byfactor)}
+            onDecrement={() => onDecrement(counter.id - 1, counter.byfactor)}
           />
         ))}
       </div>
